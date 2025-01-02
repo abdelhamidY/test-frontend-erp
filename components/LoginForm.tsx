@@ -20,7 +20,7 @@ export function LoginForm() {
                   placeholder="name@company.com"
                   required
                   type="email"
-                  className="bg-ghred-50 text-ghred-900 placeholder:text-ghred-700 focus:border-ghred-500 focus:ring-ghred-500 dark:border-ghred-400 dark:bg-ghred-100 dark:focus:border-ghred-500 dark:focus:ring-ghred-500 border-cyan-500"
+                  className="border-cyan-500 bg-ghred-50 text-ghred-900 placeholder:text-ghred-700 focus:border-ghred-500 focus:ring-ghred-500 dark:border-ghred-400 dark:bg-ghred-100 dark:focus:border-ghred-500 dark:focus:ring-ghred-500"
                 />
               </div>
               <div>
@@ -35,7 +35,7 @@ export function LoginForm() {
                   placeholder="••••••••"
                   required
                   type="password"
-                  className="bg-ghred-50 text-ghred-900 placeholder:text-ghred-700 focus:border-ghred-500 focus:ring-ghred-500 dark:border-ghred-400 dark:bg-ghred-100 dark:focus:border-ghred-500 dark:focus:ring-ghred-500 border-cyan-500"
+                  className="border-cyan-500 bg-ghred-50 text-ghred-900 placeholder:text-ghred-700 focus:border-ghred-500 focus:ring-ghred-500 dark:border-ghred-400 dark:bg-ghred-100 dark:focus:border-ghred-500 dark:focus:ring-ghred-500"
                 />
               </div>
               <div className="flex items-center justify-between">
@@ -61,7 +61,7 @@ export function LoginForm() {
               </div>
               <Button
                 type="submit"
-                className="bg-ghred-500 hover:bg-ghred-600 w-full"
+                className="w-full bg-ghred-500 hover:bg-ghred-600"
               >
                 Sign in
               </Button>
