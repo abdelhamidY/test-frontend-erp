@@ -2,6 +2,10 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { ThemeModeScript } from "flowbite-react";
 import "./globals.css";
+import dynamic from "next/dynamic";
+const ReactQueryProvider = dynamic(
+  () => import("@/utils/providers/ReactQueryProvider/ReactQueryProvider"),
+);
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -20,7 +24,9 @@ export default function RootLayout({
       <head>
         <ThemeModeScript />
       </head>
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        <ReactQueryProvider>{children}</ReactQueryProvider>
+      </body>
     </html>
   );
 }

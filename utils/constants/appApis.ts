@@ -1,5 +1,5 @@
-const AppApis = {
-    login: "http://localhost:3000/login",
-    otp: "http://localhost:3000/otp",
-    dashboard: "http://localhost:3000/dashboard",
+export const AppApis = {
+  auth: {
+    login: "/api/v1/user/login",
+  },
 };

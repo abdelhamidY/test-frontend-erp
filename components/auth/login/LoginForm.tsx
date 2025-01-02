@@ -1,6 +1,39 @@
-import { Button, Card, Checkbox, Label, TextInput } from "flowbite-react";
+"use client";
+import InputCustom from "@/components/shared/TextInput";
+import { Button, Card, Checkbox, Label } from "flowbite-react";
+import useLoginApi from "./hooks/useLogin.api";
+import useLoginFormik from "./hooks/useLogin.formik";
 
 export function LoginForm() {
+  const { mutate: mutateLogin, isLoading } = useLoginApi({
+    onSuccess(response) {
+      console.log(response.data);
+    },
+    onError(error) {
+      console.log(error);
+
+      if (error.response?.status === 404) {
+        loginFormik.setFieldError("email", error.response.data.detail);
+      }
+
+      if (error.response?.status === 401) {
+        loginFormik.setFieldError("password", error.response.data.detail);
+      }
+
+    },
+  });
+
+  const loginFormik = useLoginFormik({
+    onSubmit: async (values) => {
+      mutateLogin({
+        email: values.email,
+        password: values.password,
+        user_type: "root",
+        ip_address: "196.221.27.134",
+      });
+    },
+  });
+
   return (
     <section className="bg-gray-50 dark:bg-gray-900">
       <div className="mx-auto flex flex-col items-center justify-center px-6 py-8 md:h-screen lg:py-0">
@@ -10,17 +43,26 @@ export function LoginForm() {
             <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 dark:text-white md:text-2xl">
               Sign in to your account
             </h1>
-            <form className="space-y-4 md:space-y-6" action="#">
+            <form
+              className="space-y-4 md:space-y-6"
+              action="#"
+              onSubmit={loginFormik.handleSubmit}
+            >
               <div>
                 <Label htmlFor="email" className="mb-2 block dark:text-white">
                   Your email
                 </Label>
-                <TextInput
+                <InputCustom
                   id="email"
                   placeholder="name@company.com"
-                  required
                   type="email"
-                  className="border-cyan-500 bg-ghred-50 text-ghred-900 placeholder:text-ghred-700 focus:border-ghred-500 focus:ring-ghred-500 dark:border-ghred-400 dark:bg-ghred-100 dark:focus:border-ghred-500 dark:focus:ring-ghred-500"
+                  value={loginFormik.values.email}
+                  onChange={loginFormik.handleChange}
+                  error={
+                    loginFormik.touched.email &&
+                    loginFormik.errors.email !== undefined
+                  }
+                  helperText={loginFormik.errors.email}
                 />
               </div>
               <div>
@@ -30,12 +72,17 @@ export function LoginForm() {
                 >
                   Password
                 </Label>
-                <TextInput
+                <InputCustom
                   id="password"
                   placeholder="••••••••"
-                  required
                   type="password"
-                  className="border-cyan-500 bg-ghred-50 text-ghred-900 placeholder:text-ghred-700 focus:border-ghred-500 focus:ring-ghred-500 dark:border-ghred-400 dark:bg-ghred-100 dark:focus:border-ghred-500 dark:focus:ring-ghred-500"
+                  value={loginFormik.values.password}
+                  onChange={loginFormik.handleChange}
+                  error={
+                    loginFormik.touched.password &&
+                    loginFormik.errors.password !== undefined
+                  }
+                  helperText={loginFormik.errors.password}
                 />
               </div>
               <div className="flex items-center justify-between">
@@ -62,6 +109,7 @@ export function LoginForm() {
               <Button
                 type="submit"
                 className="w-full bg-ghred-500 hover:bg-ghred-600"
+                isProcessing={isLoading}
               >
                 Sign in
               </Button>
