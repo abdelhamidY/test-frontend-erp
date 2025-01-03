@@ -1,0 +1,4 @@
+import * as React from "react";
+import type { SVGProps } from "react";
+const SvgFilter = (props: SVGProps<SVGSVGElement>) => <svg xmlns="http://www.w3.org/2000/svg" width={12} height={13} fill="none" {...props}><g clipPath="url(#filter_svg__a)"><path fill="#1F2A37" stroke="#111928" d="m.547 1.362-.002-.003a.213.213 0 0 1-.022-.23.23.23 0 0 1 .089-.093A.26.26 0 0 1 .745 1h10.51q.073 0 .133.036.06.037.088.093a.2.2 0 0 1 .023.117l.498.046-.498-.046a.2.2 0 0 1-.045.113l-.001.003-4.356 5.745-.101.134v4.276l-1.992-1.453V7.241l-.101-.134z" /></g><defs><clipPath id="filter_svg__a"><path fill="#fff" d="M0 .5h12v12H0z" /></clipPath></defs></svg>;
+export default SvgFilter;

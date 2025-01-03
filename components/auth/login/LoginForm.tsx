@@ -1,25 +1,72 @@
 "use client";
 import InputCustom from "@/components/shared/TextInput";
+import GaragHeroToast from "@/utils/helpers/garagHeroToast/garageHeroToast";
 import { Button, Card, Checkbox, Label } from "flowbite-react";
 import useLoginApi from "./hooks/useLogin.api";
 import useLoginFormik from "./hooks/useLogin.formik";
+import useRequestVerfication from "./hooks/useRequetVerfication.api";
+import { useRouter } from "next/navigation";
+import { appRoutes } from "@/utils/constants/appRoutes";
+import { useAppDispatch } from "@/redux/redux.configration";
+import { setAuthUser } from "@/redux/slices/auth.slice";
 
 export function LoginForm() {
-  const { mutate: mutateLogin, isLoading } = useLoginApi({
+  const router = useRouter();
+  const dispatch = useAppDispatch();
+  const {
+    mutate: mutateRequestVerfication,
+    isLoading: isRequestVerficationLoading,
+  } = useRequestVerfication({
     onSuccess(response) {
-      console.log(response.data);
+      GaragHeroToast({
+        type: "success",
+        title: "Verfiy your email",
+        description: "We've sent you an email to verify your account",
+      });
+    },
+    onError(error) {},
+  });
+
+  const { mutate: mutateLogin, isLoading: isLoginLoading } = useLoginApi({
+    onSuccess(response) {
+      router.push(appRoutes.otp);
+      GaragHeroToast({
+        type: "success",
+        title: "Verfiy OTP",
+        description: response.data.message,
+      });
+      dispatch(
+        setAuthUser({
+          email: loginFormik.values.email,
+        }),
+      );
     },
     onError(error) {
-      console.log(error);
-
+      // user not found
       if (error.response?.status === 404) {
         loginFormik.setFieldError("email", error.response.data.detail);
       }
-
+      // incorrect password
       if (error.response?.status === 401) {
         loginFormik.setFieldError("password", error.response.data.detail);
       }
-
+      // Bad Request
+      if (error.response?.status === 400) {
+        loginFormik.setFieldError("email", error.response.data.detail);
+        loginFormik.setFieldError("password", error.response.data.detail);
+      }
+      // Forbidden
+      if (error.response?.status === 403) {
+        loginFormik.setFieldError("password", error.response.data.detail);
+      }
+      // Verfiy your email
+      if (error.response?.status === 423) {
+        loginFormik.setFieldError("email", error.response.data.detail);
+        mutateRequestVerfication({
+          email: loginFormik.values.email,
+          user_type: "root",
+        });
+      }
     },
   });
 
@@ -109,7 +156,8 @@ export function LoginForm() {
               <Button
                 type="submit"
                 className="w-full bg-ghred-500 hover:bg-ghred-600"
-                isProcessing={isLoading}
+                isProcessing={isLoginLoading}
+                disabled={isLoginLoading}
               >
                 Sign in
               </Button>

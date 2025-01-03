@@ -10,3 +10,10 @@ export type ErrorResponse<T> = {
   status: AvailableCodes;
   detail: string;
 };
+
+export type SuccessResponseWithPagination<T> = {
+  data: T;
+  total: number;
+  page: number;
+  page_size: number;
+};

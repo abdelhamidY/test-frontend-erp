@@ -1,6 +1,5 @@
-
 export const appRoutes = {
-    login: "/login",
-    otp: "/otp",
-    dashboard: "/dashboard",
+  login: "/login",
+  otp: "/otp",
+  dashboard: "/",
 };

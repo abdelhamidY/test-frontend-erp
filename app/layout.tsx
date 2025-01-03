@@ -3,6 +3,9 @@ import { Inter } from "next/font/google";
 import { ThemeModeScript } from "flowbite-react";
 import "./globals.css";
 import dynamic from "next/dynamic";
+import ReactToastifyProvider from "@/utils/providers/ReactToastifyProvider/ReactToastifyProvider";
+import ReactReduxProvider from "@/utils/providers/ReactReduxProvider/ReactReduxProvider";
+import ReactReduxParsistProvider from "@/utils/providers/ReactReduxParsistProvider/ReactReduxParsistProvider";
 const ReactQueryProvider = dynamic(
   () => import("@/utils/providers/ReactQueryProvider/ReactQueryProvider"),
 );
@@ -24,8 +27,14 @@ export default function RootLayout({
       <head>
         <ThemeModeScript />
       </head>
-      <body className={inter.className}>
-        <ReactQueryProvider>{children}</ReactQueryProvider>
+      <body>
+        <ReactReduxProvider>
+          <ReactReduxParsistProvider>
+            <ReactQueryProvider>
+              <ReactToastifyProvider>{children}</ReactToastifyProvider>
+            </ReactQueryProvider>
+          </ReactReduxParsistProvider>
+        </ReactReduxProvider>
       </body>
     </html>
   );

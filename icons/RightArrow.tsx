@@ -1,0 +1,4 @@
+import * as React from "react";
+import type { SVGProps } from "react";
+const SvgRightArrow = (props: SVGProps<SVGSVGElement>) => <svg xmlns="http://www.w3.org/2000/svg" width={6} height={12} fill="none" {...props}><path fill="#6B7280" d="M1.01 11.4a.95.95 0 0 1-.554-.182 1.07 1.07 0 0 1-.368-.484 1.16 1.16 0 0 1-.056-.623c.038-.21.133-.401.273-.552L3.59 6.007.305 2.455a1.1 1.1 0 0 1-.224-.35A1.15 1.15 0 0 1 .292.914 1 1 0 0 1 .62.68a.93.93 0 0 1 .772.008 1 1 0 0 1 .324.241l3.992 4.315c.187.202.292.477.292.763s-.105.56-.292.762l-3.992 4.315a.96.96 0 0 1-.706.316" /></svg>;
+export default SvgRightArrow;

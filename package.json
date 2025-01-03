@@ -8,16 +8,23 @@
     "start": "next start",
     "format": "prettier . --write",
     "lint": "next lint",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "svgr": "npx @svgr/cli --no-prettier --out-dir ./icons --ignore-existing --typescript ./public/icons"
   },
   "dependencies": {
+    "@reduxjs/toolkit": "^2.5.0",
+    "@svgr/cli": "^8.1.0",
     "axios": "^1.7.9",
     "flowbite-react": "^0.8.0",
     "formik": "^2.4.6",
+    "js-cookie": "^3.0.5",
     "next": "^14.2.22",
     "react": "^18",
     "react-dom": "^18",
     "react-query": "^3.39.3",
+    "react-redux": "^9.2.0",
+    "react-toastify": "^11.0.2",
+    "redux-persist": "^6.0.0",
     "yup": "^1.6.1"
   },
   "devDependencies": {
@@ -31,7 +38,7 @@
     "eslint-plugin-tailwindcss": "^3.15.1",
     "postcss": "^8",
     "prettier": "^3.2.5",
-    "prettier-plugin-tailwindcss": "^0.5.12",
+    "prettier-plugin-tailwindcss": "^0.6.9",
     "tailwindcss": "^3.4.1",
     "typescript": "^5"
   }

@@ -1,0 +1,4 @@
+import * as React from "react";
+import type { SVGProps } from "react";
+const SvgSearch = (props: SVGProps<SVGSVGElement>) => <svg xmlns="http://www.w3.org/2000/svg" width={16} height={17} fill="none" {...props}><path fill="#6B7280" stroke="#6B7280" d="M15.2 16.5V16a.3.3 0 0 1-.212-.088l-3.196-3.196a.3.3 0 0 1 .006-.418l-.354-.354.354.354a.3.3 0 0 1 .418-.006l3.196 3.196A.3.3 0 0 1 15.2 16zm0 0a.8.8 0 0 1-.565-.234l-3.2-3.2 4.33 2.068A.8.8 0 0 1 15.2 16.5ZM6.4 1.6a5.3 5.3 0 1 0 5.3 5.3 5.305 5.305 0 0 0-5.3-5.3Zm0 11.2a5.9 5.9 0 1 1 5.9-5.9 5.907 5.907 0 0 1-5.9 5.9Z" /></svg>;
+export default SvgSearch;
